@@ -1,0 +1,8 @@
+.search {
+  min-width: 400px;
+}
+
+.input-search::placeholder {
+  font-size: 14px;
+  opacity: 0.6;
+}
