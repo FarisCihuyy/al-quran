@@ -1,45 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap");
+
 :root {
-  /* --color-bg: #FFFDF6; */
-  --color-bg: #E1F0DA;
-  --color-fg: #D4E7C5;
-  --color-accent: #FCDC2A; 
-  --color-text: #12372A;
+  --color-bg: #41a67e;
+  --color-fg: #d4e7c5;
+  --color-accent: #fcdc2a;
+  --color-text: #12372a;
   --color-primary: #eafaea79;
 }
 
-
-
-*{
+* {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  
 }
-body{
+
+body {
   color: var(--color-text);
   background-color: var(--color-primary);
+  font-family: "Amiri Quran", serif;
 }
 
-
-.search {
-  min-width: 400px;
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  background-color: var(--color-bg);
 }
 
-.input-search::placeholder {
-  font-size: 14px;
-  opacity: 0.6;
+.nav a {
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--color-fg);
+  transition: all 0.3s ease-in-out;
+}
+
+.nav a:hover {
+  color: var(--color-accent);
+}
+
+.nav form {
+  gap: 1rem;
+}
+
+.nav input {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #d4e7c573;
+  border: 1px solid white;
+  color: var(--color-text);
+  transition: all 0.3s ease-in-out;
+}
+
+.nav input::placeholder {
+  color: var(--color-text);
+}
+
+.nav input:focus {
+  outline: none;
+  box-shadow: 0 0 5px var(--color-accent);
+  background-color: var(--color-fg);
+  color: var(--color-text);
+}
+
+.nav button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--color-fg);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
 .sidebar {
   width: 300px;
   background-color: var(--color-bg);
-  border-right: 1px solid var(--color-fg);
 }
-.links li{
-  display: inline-block;
-  list-style-type: none;
-  padding: 16px;
-}
-.links li:hover {
-  background-color: var(--color-fg) ;
+
+.links li {
+  font-size: 12px;
+  background-color: transparent !important;
 }

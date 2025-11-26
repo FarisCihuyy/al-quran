@@ -1,12 +1,12 @@
 // js/app.js
-const BASE_URL = 'https://quran-api-id.vercel.app';
+const BASE_URL = "https://quran-api-id.vercel.app";
 
 // ambil elemen
-const listEl = document.getElementById('surah-list');
-const contentEl = document.getElementById('surah-content');
+const listEl = document.getElementById("surah-list");
+const contentEl = document.getElementById("surah-content");
 
-if (!listEl) console.error('Element #surah-list tidak ditemukan');
-if (!contentEl) console.error('Element #surah-content tidak ditemukan');
+if (!listEl) console.error("Element #surah-list tidak ditemukan");
+if (!contentEl) console.error("Element #surah-content tidak ditemukan");
 
 // ================== LOAD LIST SURAH ==================
 async function loadSurahList() {
@@ -17,16 +17,16 @@ async function loadSurahList() {
 
     if (!Array.isArray(surahs)) {
       listEl.innerHTML = `<li class="fs-5">Daftar surah tidak tersedia</li>`;
-      console.error('Format response tidak sesuai:', surahs);
+      console.error("Format response tidak sesuai:", surahs);
       return;
     }
 
-    listEl.innerHTML = '';
+    listEl.innerHTML = "";
 
     surahs.forEach((item) => {
-      const li = document.createElement('li');
-      li.className = 'fs-5 py-2 px-3 surah-item';
-      li.style.cursor = 'pointer';
+      const li = document.createElement("li");
+      li.className = "list-group-item py-2 px-3 surah-item";
+      li.style.cursor = "pointer";
 
       const no = item.number ?? item.no ?? item.nomor;
       const name =
@@ -34,14 +34,14 @@ async function loadSurahList() {
         item.translation?.id ||
         item.name?.short ||
         item.name?.long ||
-        'Nama surat';
+        "Nama surat";
 
       li.dataset.id = no;
-      li.textContent = `${no ? no + '. ' : ''}${name}`;
+      li.textContent = `${no ? no + ". " : ""}${name}`;
       listEl.appendChild(li);
     });
   } catch (err) {
-    console.error('loadSurahList error:', err);
+    console.error("loadSurahList error:", err);
     listEl.innerHTML = `<li class="fs-5">Gagal memuat daftar surah</li>`;
   }
 }
@@ -53,10 +53,10 @@ async function loadSurahDetail(id) {
   try {
     // hapus style welcome
     contentEl.classList.remove(
-      'd-flex',
-      'flex-column',
-      'justify-content-center',
-      'text-center'
+      "d-flex",
+      "flex-column",
+      "justify-content-center",
+      "text-center"
     );
 
     contentEl.innerHTML = `
@@ -71,13 +71,13 @@ async function loadSurahDetail(id) {
 
     if (!surah || !surah.verses) {
       contentEl.innerHTML = `<p class="text-danger">Surat tidak ditemukan.</p>`;
-      console.error('Data surah tidak sesuai:', surah);
+      console.error("Data surah tidak sesuai:", surah);
       return;
     }
 
-    const arabName = surah.name?.short || surah.name?.long || '';
+    const arabName = surah.name?.short || surah.name?.long || "";
     const latin =
-      surah.name?.transliteration?.id || surah.translation?.id || '';
+      surah.name?.transliteration?.id || surah.translation?.id || "";
 
     const header = `
       <div class="mb-5">
@@ -97,51 +97,51 @@ async function loadSurahDetail(id) {
           v.translation ||
           v.translation?.text ||
           v.text?.translation ||
-          '';
+          "";
 
         return `
-          <div class="w-100 mb-4">
-            <div class="d-flex align-items-start justify-content-between">
+          <div class="w-1004">
+            <div class="p-4 border-bottom border-bottom-primary d-flex align-items-start justify-content-between">
               <span class="fs-4">${num}</span>
-              <div class="text-end" style="max-width: 90%;">
-                <h1 class="mb-2" style="font-family: 'Scheherazade', serif;">
+              <div class="flex-fill text-end" style="max-width: 90%;">
+                <h1 class="mb-4" style="font-family: 'Scheherazade', serif;">
                   ${arab}
                 </h1>
-                <p class="text-muted">${indo}</p>
+                <p class="flex-fill text-start" style="max-width: 90%;">${indo}</p>
               </div>
             </div>
           </div>
         `;
       })
-      .join('');
+      .join("");
 
     contentEl.innerHTML = header + verses;
 
     // scroll ke atas
     contentEl.scrollTop = 0;
     contentEl.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
+      behavior: "smooth",
+      block: "start",
     });
   } catch (err) {
-    console.error('loadSurahDetail error:', err);
+    console.error("loadSurahDetail error:", err);
     contentEl.innerHTML = `<p class="text-danger">Gagal memuat surat.</p>`;
   }
 }
 
 // ================== EVENT LIST CLICK ==================
-listEl.addEventListener('click', (e) => {
-  const item = e.target.closest('li');
+listEl.addEventListener("click", (e) => {
+  const item = e.target.closest("li");
   if (!item) return;
 
   const id = item.dataset.id;
   if (!id) return;
 
   document
-    .querySelectorAll('.surah-item')
-    .forEach((el) => el.classList.remove('active'));
+    .querySelectorAll(".surah-item")
+    .forEach((el) => el.classList.remove("active"));
 
-  item.classList.add('active');
+  item.classList.add("active");
 
   loadSurahDetail(id);
 });

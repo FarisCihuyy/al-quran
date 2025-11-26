@@ -1,95 +1,149 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home Page</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-</head>
-<body>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page - Al-Qur'an Digital</title>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="app.html"><i class="bi bi-book"></i> Al-Qur'an</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="about.html"><i class="bi bi-info-circle"></i> About </a>
-        </li>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-gear"></i> Setting </a>
-        </li>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="contact.html"><i class="bi bi-phone"></i> Contact </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+    <!-- Bootstrap CSS (gunakan versi CDN yang cocok) -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary px-4">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="app.html"
+          ><i class="bi bi-book"></i> Al-Qur'an</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-<header class="bg-success text-white text-center p-5">
-  <h1>SELAMAT DATANG DI AL QURAN DIGITAL</h1>
-  <p class="lead">Membaca, belajar, dan memahami Al-Quran dengan mudah dan interaktif</p>
-</header>
-
-<section class="container py-5">
-   <h2></h2>
-  <div class="row mt-4 justify-content-center">
-    <!-- Card 1 -->
-    <div class="col-md-4 mb-4">
-      <div class="card h-100">
-        <img src="https://darunnajah.com/wp-content/uploads/2018/11/images-12.jpg" alt="Orang Mengaji">
-        <div class="card-body">
-          <h5 class="card-title">Membaca Al-Quran</h5>
-          <p class="card-text">Membaca seluruh Al-Quran dengan tampilan digital yang mudah dibaca.</p>
+        <!-- Collapse yang benar -->
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="app.html"
+                >Baca <i class="bi bi-box-arrow-up-right"></i
+              ></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html"
+                >About<i class="bi bi-info-circle"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html"
+                >Contact<i class="bi bi-phone"></i>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
-    </div>
-        <div class="col-md-4 mb-4">
+    </nav>
+
+    <header class="bg-success text-white text-center p-5">
+      <div class="container">
+        <h1 class="mb-2">SELAMAT DATANG DI AL QURAN DIGITAL</h1>
+        <p class="lead mb-0">
+          Membaca, belajar, dan memahami Al-Quran dengan mudah dan interaktif
+        </p>
+      </div>
+    </header>
+
+    <!-- Section fitur / kartu -->
+    <section class="container py-5">
+      <div class="row g-4 justify-content-center">
+        <!-- Card 1 -->
+        <div class="col-12 col-sm-6 col-md-4">
           <div class="card h-100">
-         <img src="https://www.sekolah.mu/blog/wp-content/uploads/2022/08/29-0-blibli-com-3.jpg" class="card-img-top" alt="Orang Mengaji">
-         <div class="card-body">
-          <h5 class="card-title">Mendengarkan Al-Quran</h5>
-          <p class="card-text"> Mendengarkan Al-Quran dengan tajwid yang benar, mudah diikuti untuk semua usia.</p>
+            <img
+              src="https://darunnajah.com/wp-content/uploads/2018/11/images-12.jpg"
+              class="card-img-top"
+              alt="Membaca Al-Quran"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Membaca Al-Quran</h5>
+              <p class="card-text">
+                Membaca seluruh Al-Quran dengan tampilan digital yang mudah
+                dibaca.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="card h-100">
+            <img
+              src="https://www.sekolah.mu/blog/wp-content/uploads/2022/08/29-0-blibli-com-3.jpg"
+              class="card-img-top"
+              alt="Mendengarkan Al-Quran"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Mendengarkan Al-Quran</h5>
+              <p class="card-text">
+                Mendengarkan Al-Quran dengan tajwid yang benar, mudah diikuti
+                untuk semua usia.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="card h-100">
+            <img
+              src="https://a-cdn.sindonews.net/dyn/732/content/2016/04/11/15/1100039/gerakan-nusantara-mengaji-digelar-serentak-7zW-thumb.jpg"
+              class="card-img-top"
+              alt="Mengaji Al-Quran"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Mengaji Al-Quran</h5>
+              <p class="card-text">
+                Belajar membaca Al-Quran dengan tajwid yang benar, mudah diikuti
+                untuk semua usia.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-4 mb-4">
-          <div class="card h-100">
-         <img src="https://a-cdn.sindonews.net/dyn/732/content/2016/04/11/15/1100039/gerakan-nusantara-mengaji-digelar-serentak-7zW-thumb.jpg" class="card-img-top" alt="Orang Mengaji">
-         <div class="card-body">
-          <h5 class="card-title">Mengaji Al-Quran</h5>
-          <p class="card-text">Belajar membaca Al-Quran dengan tajwid yang benar, mudah diikuti untuk semua usia.</p>
-        </div>
-    </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-  
-   
-  <hr>
+    <!-- Optional: footer -->
+    <footer class="bg-light text-center py-4">
+      <div class="container">
+        <small
+          >&copy; <span id="year"></span> Al-Qur'an Digital — Semua hak
+          dilindungi.</small
+        >
+      </div>
+    </footer>
 
-</main>
-
-</div>
-
-
-  <hr>
-    </main>
+    <!-- Bootstrap JS bundle -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
+
+    <script>
+      // set footer year
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
   </body>
 </html>
