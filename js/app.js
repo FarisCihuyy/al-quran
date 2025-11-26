@@ -1,144 +1,150 @@
 // js/app.js
-const API_URL = 'https://quran-api-id.vercel.app';
+const BASE_URL = 'https://quran-api-id.vercel.app';
 
-// elemen
-const surahList = document.getElementById('surah-list');
-const surahContent = document.getElementById('surah-content'); // welcome container
-if (!surahList) console.error('Element #surah-list tidak ditemukan');
-if (!surahContent) console.error('Element #surah-content tidak ditemukan');
+// ambil elemen
+const listEl = document.getElementById('surah-list');
+const contentEl = document.getElementById('surah-content');
 
-// --- Fungsi: render daftar surah ---
+if (!listEl) console.error('Element #surah-list tidak ditemukan');
+if (!contentEl) console.error('Element #surah-content tidak ditemukan');
+
+// ================== LOAD LIST SURAH ==================
 async function loadSurahList() {
   try {
-    const res = await fetch(`${API_URL}/surah`);
+    const res = await fetch(`${BASE_URL}/surah`);
     const json = await res.json();
-    const data = json.data || json.surahs || json; // antisipasi struktur
+    const surahs = json.data || json.surahs || json;
 
-    if (!Array.isArray(data)) {
-      surahList.innerHTML = "<li class='fs-5'>Daftar surah tidak tersedia</li>";
-      console.error('Format data surah unexpected:', data);
+    if (!Array.isArray(surahs)) {
+      listEl.innerHTML = `<li class="fs-5">Daftar surah tidak tersedia</li>`;
+      console.error('Format response tidak sesuai:', surahs);
       return;
     }
 
-    // kosongkan dulu
-    surahList.innerHTML = '';
+    listEl.innerHTML = '';
 
-    data.forEach((s) => {
+    surahs.forEach((item) => {
       const li = document.createElement('li');
       li.className = 'fs-5 py-2 px-3 surah-item';
       li.style.cursor = 'pointer';
-      // nomor surah (fallback ke index kalau tidak ada)
-      const number = s.number ?? s.no ?? s.nomor ?? null;
-      li.dataset.id = number;
-      // ambil nama yg paling relevan
-      const title =
-        s.name?.transliteration?.id ||
-        s.translation?.id ||
-        s.name?.short ||
-        s.name?.long ||
-        s.short ||
+
+      const no = item.number ?? item.no ?? item.nomor;
+      const name =
+        item.name?.transliteration?.id ||
+        item.translation?.id ||
+        item.name?.short ||
+        item.name?.long ||
         'Nama surat';
-      li.textContent = `${number ? number + '. ' : ''}${title}`;
-      surahList.appendChild(li);
+
+      li.dataset.id = no;
+      li.textContent = `${no ? no + '. ' : ''}${name}`;
+      listEl.appendChild(li);
     });
   } catch (err) {
-    console.error('Gagal loadSurahList:', err);
-    surahList.innerHTML = "<li class='fs-5'>Gagal memuat daftar surah</li>";
+    console.error('loadSurahList error:', err);
+    listEl.innerHTML = `<li class="fs-5">Gagal memuat daftar surah</li>`;
   }
 }
 
-// --- Fungsi: fetch & tampilkan detail surah (dekl. fungsi supaya hoisted) ---
+// ================== LOAD DETAIL SURAH ==================
 async function loadSurahDetail(id) {
   if (!id) return;
+
   try {
-    // Hapus kelas welcome (center) bila ada
-    surahContent.classList.remove(
+    // hapus style welcome
+    contentEl.classList.remove(
       'd-flex',
       'flex-column',
       'justify-content-center',
       'text-center'
     );
 
-    // Loading state
-    surahContent.innerHTML = `<div class="text-center text-secondary"><h4>Memuat surat...</h4></div>`;
-
-    const res = await fetch(`${API_URL}/surah/${id}`);
-    const json = await res.json();
-    const surah = json.data || json; // antisipasi
-
-    if (!surah || !surah.verses) {
-      surahContent.innerHTML = `<p class="text-danger">Surat tidak ditemukan atau format tidak sesuai.</p>`;
-      console.error('Surah data unexpected:', surah);
-      return;
-    }
-
-    // header surat
-    const arabName = surah.name?.short || surah.name?.long || '';
-    const translit =
-      surah.name?.transliteration?.id || surah.translation?.id || '';
-    const headerHTML = `
-      <div class="mb-5">
-        <h1 class="fw-bold text-center">${translit || arabName}</h1>
-        <p class="opacity-75 fw-semibold fs-4 text-center">Surat ke-${
-          surah.number ?? id
-        }</p>
+    contentEl.innerHTML = `
+      <div class="text-center text-secondary">
+        <h4>Memuat...</h4>
       </div>
     `;
 
-    // ayat
-    const versesHTML = surah.verses
+    const res = await fetch(`${BASE_URL}/surah/${id}`);
+    const json = await res.json();
+    const surah = json.data || json;
+
+    if (!surah || !surah.verses) {
+      contentEl.innerHTML = `<p class="text-danger">Surat tidak ditemukan.</p>`;
+      console.error('Data surah tidak sesuai:', surah);
+      return;
+    }
+
+    const arabName = surah.name?.short || surah.name?.long || '';
+    const latin =
+      surah.name?.transliteration?.id || surah.translation?.id || '';
+
+    const header = `
+      <div class="mb-5">
+        <h1 class="fw-bold text-center">${latin || arabName}</h1>
+        <p class="opacity-75 fw-semibold fs-4 text-center">
+          Surat ke-${surah.number ?? id}
+        </p>
+      </div>
+    `;
+
+    const verses = surah.verses
       .map((v) => {
-        const num = v.number?.inSurah ?? v.number ?? '';
-        const arab = v.text?.arab ?? v.ar ?? v.text ?? '';
-        const translation =
-          v.translation?.id ??
-          v.translation ??
-          v.translation?.text ??
-          v.text?.translation ??
+        const num = v.number?.inSurah ?? v.number;
+        const arab = v.text?.arab ?? v.ar ?? v.text;
+        const indo =
+          v.translation?.id ||
+          v.translation ||
+          v.translation?.text ||
+          v.text?.translation ||
           '';
 
         return `
-        <div class="w-100 mb-4">
-          <div class="d-flex align-items-start justify-content-between">
-            <span class="fs-4">${num}</span>
-            <div class="text-end" style="max-width: 90%;">
-              <h1 class="mb-2" style="font-family: 'Scheherazade', serif;">${arab}</h1>
-              <p class="text-muted">${translation}</p>
+          <div class="w-100 mb-4">
+            <div class="d-flex align-items-start justify-content-between">
+              <span class="fs-4">${num}</span>
+              <div class="text-end" style="max-width: 90%;">
+                <h1 class="mb-2" style="font-family: 'Scheherazade', serif;">
+                  ${arab}
+                </h1>
+                <p class="text-muted">${indo}</p>
+              </div>
             </div>
           </div>
-        </div>
-      `;
+        `;
       })
       .join('');
 
-    surahContent.innerHTML = headerHTML + versesHTML;
-    // optional: scroll ke atas content
-    surahContent.scrollTop = 0;
+    contentEl.innerHTML = header + verses;
+
+    // scroll ke atas
+    contentEl.scrollTop = 0;
+    contentEl.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
   } catch (err) {
-    console.error('Gagal loadSurahDetail:', err);
-    surahContent.innerHTML = `<p class="text-danger">Gagal memuat surat. Cek console untuk detail.</p>`;
+    console.error('loadSurahDetail error:', err);
+    contentEl.innerHTML = `<p class="text-danger">Gagal memuat surat.</p>`;
   }
-  // scroll ke atas setelah isi berubah
-  surahContent.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start',
-  });
 }
 
-// --- Event delegation: klik surah di sidebar ---
-surahList.addEventListener('click', (e) => {
-  const li = e.target.closest('li');
-  if (!li) return;
-  const id = li.dataset.id;
+// ================== EVENT LIST CLICK ==================
+listEl.addEventListener('click', (e) => {
+  const item = e.target.closest('li');
+  if (!item) return;
+
+  const id = item.dataset.id;
   if (!id) return;
-  // bersihkan active class dulu (opsional)
+
   document
     .querySelectorAll('.surah-item')
-    .forEach((i) => i.classList.remove('active'));
-  li.classList.add('active');
-  // panggil fungsi yang sudah dideklarasikan
+    .forEach((el) => el.classList.remove('active'));
+
+  item.classList.add('active');
+
   loadSurahDetail(id);
 });
 
-// Jalankan awal
+// ================== INIT ==================
 loadSurahList();
