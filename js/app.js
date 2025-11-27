@@ -100,11 +100,11 @@ async function loadSurahDetail(id) {
           '';
 
         return `
-          <div class="w-1004">
+          <div class="w-100">
             <div class="p-4 border-bottom border-bottom-primary d-flex align-items-start justify-content-between">
               <span class="fs-4">${num}</span>
               <div class="flex-fill text-end" style="max-width: 90%;">
-                <h1 class="mb-4" style="font-family: 'Scheherazade', serif;">
+                <h1 class="arabic">
                   ${arab}
                 </h1>
                 <p class="flex-fill text-start" style="max-width: 90%;">${indo}</p>

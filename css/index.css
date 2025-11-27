@@ -8,6 +8,17 @@
   --color-primary: #eafaea79;
 }
 
+@font-face {
+  font-family: "Scheherazade";
+  src: url(/assets/font/ScheherazadeNew-Regular.ttf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -17,7 +28,7 @@
 body {
   color: var(--color-text);
   background-color: var(--color-primary);
-  font-family: "Amiri Quran", serif;
+  font-family: "Scheherazade", serif;
 }
 
 .nav {
@@ -26,6 +37,7 @@ body {
   align-items: center;
   padding: 1rem 3rem;
   background-color: var(--color-bg);
+  border-bottom: 2px solid #fcdc2a75;
 }
 
 .nav a {
@@ -79,11 +91,28 @@ body {
 }
 
 .sidebar {
-  width: 300px;
-  background-color: var(--color-bg);
+  width: 250px;
 }
 
 .links li {
   font-size: 12px;
   background-color: transparent !important;
+}
+
+#surah-list {
+  background-color: #41a67e2f;
+}
+
+#surah-list li .surah-number {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.arabic {
+  line-height: 2;
+  font-size: 2rem;
+  color: var(--color-text);
+  font-family: "Scheherazade", "Amiri Quran", serif !important;
+  text-align: right;
 }
