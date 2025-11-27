@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap');
 
 :root {
   --color-bg: #41a67e;
@@ -9,8 +9,8 @@
 }
 
 @font-face {
-  font-family: "Scheherazade";
-  src: url(/assets/font/ScheherazadeNew-Regular.ttf) format("truetype");
+  font-family: 'Scheherazade';
+  src: url(/assets/font/ScheherazadeNew-Regular.ttf) format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -28,7 +28,7 @@ html {
 body {
   color: var(--color-text);
   background-color: var(--color-primary);
-  font-family: "Scheherazade", serif;
+  font-family: 'Scheherazade', serif;
 }
 
 .nav {
@@ -113,6 +113,6 @@ body {
   line-height: 2;
   font-size: 2rem;
   color: var(--color-text);
-  font-family: "Scheherazade", "Amiri Quran", serif !important;
+  font-family: 'Scheherazade', 'Amiri Quran', serif !important;
   text-align: right;
 }
