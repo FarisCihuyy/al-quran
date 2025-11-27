@@ -25,7 +25,7 @@ async function loadSurahList() {
 
     surahs.forEach((item) => {
       const li = document.createElement("li");
-      li.className = "list-group-item py-2 px-3 surah-item";
+      li.className = "py-2 px-3 surah-item";
       li.style.cursor = "pointer";
 
       const no = item.number ?? item.no ?? item.nomor;
@@ -37,7 +37,14 @@ async function loadSurahList() {
         "Nama surat";
 
       li.dataset.id = no;
-      li.textContent = `${no ? no + ". " : ""}${name}`;
+      li.innerHTML = `
+      <div class="surah-number">
+        <p>${no}</p>
+        <div style="display: flex; flex-direction: column;">
+          <span class="surah-name">${item.name.short}</span>
+          <span class="surah-english">${name}</span>
+        </div>
+      </div>`;
       listEl.appendChild(li);
     });
   } catch (err) {
@@ -100,11 +107,11 @@ async function loadSurahDetail(id) {
           "";
 
         return `
-          <div class="w-1004">
+          <div class="w-100">
             <div class="p-4 border-bottom border-bottom-primary d-flex align-items-start justify-content-between">
               <span class="fs-4">${num}</span>
               <div class="flex-fill text-end" style="max-width: 90%;">
-                <h1 class="mb-4" style="font-family: 'Scheherazade', serif;">
+                <h1 class="arabic">
                   ${arab}
                 </h1>
                 <p class="flex-fill text-start" style="max-width: 90%;">${indo}</p>
